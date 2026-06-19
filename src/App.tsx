@@ -32,13 +32,19 @@ function App() {
           ? Array.from({ length: 8 }).map((_, index) => (
               <PokemonSkeleton key={index} />
             ))
-          : filteredPokemons?.map((pokemon, index) => (
-              <PokemonCard
-                key={pokemon.name}
-                name={pokemon.name}
-                index={index}
-              />
-            ))}
+          : filteredPokemons?.map((pokemon) => {
+              const pokemonId = pokemon.url.split("/")[6];
+
+              const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+
+              return (
+                <PokemonCard
+                  key={pokemon.name}
+                  name={pokemon.name}
+                  image={image}
+                />
+              );
+            })}
       </div>
     </div>
   );
