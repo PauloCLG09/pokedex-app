@@ -1,73 +1,109 @@
-# React + TypeScript + Vite
+Pokedex App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacion web desarrollada con React y Typescript que consume la API pública de
+Pokemon(PokeAPI) y la API de JSONPlaceholder para implementar un CRUD de 
+publicaciones.
 
-Currently, two official plugins are available:
+Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+React
+TypeScript
+React Router DOM
+React Query (TanStack Query)
+React Hook Form
+Zod
+Axios
+Tailwind CSS v3
+Vite
 
-## React Compiler
+APIs utilizadas
+PokeAPI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+https://pokeapi.co/
 
-## Expanding the ESLint configuration
+Permite obtener información sobre Pokemon , incluyendo 
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Nombre
+Imagen
+Tipos
+Estadísticas
+Información detallada
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+JSONPlaceholder
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+https://jsonplaceholder.typicode.com/
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Utilizada para implementar el CRUD de publicaciones:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Crear post
+Listar posts
+Ver detalle
+Editar post
+Eliminar post
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Funcionalidades
+Nivel 1
+Listado de Pokémon.
+Consumo de API con React Query.
+Diseño responsivo con Tailwind CSS.
+Skeletons de carga.
+Búsqueda de Pokémon.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Nivel 2
+Vista de detalle de Pokémon.
+Navegación con React Router.
+Paginación.
+Formulario validado con Zod.
+Nivel 3
+CRUD completo de Posts.
+Integración de una segunda API.
+Uso de Axios.
+Manejo de errores personalizado.
+Hooks personalizados.
+Modularización por features.
+Componentes reutilizables.
+Estructura del proyecto
+src
+├-- components
+├-- features
+│   └-- posts
+│       ├-- hooks
+│       ├-- pages
+│       ├-- schemas
+│       └-- services
+├-- pages
+├-- services
+├-- types
+└-- hooks
+Instalación
+
+Clonar el repositorio:
+
+git clone https://github.com/PauloCLG09/pokedex-app.git
+
+Ingresar al proyecto:
+
+cd pokedex-app
+
+Instalar dependencias:
+
+npm install
+
+Ejecutar en desarrollo:
+
+npm run dev
+
+Generar build de producción:
+
+npm run build
+Rutas principales
+Ruta	Descripción
+/	Lista de Pokémon
+/pokemon/	Detalle de Pokémon
+/posts	Lista de Posts
+/posts/create	Crear Post
+/posts/	Detalle de Post
+/posts/edit/	Editar Post
+Autor
+
+Paulo Cesar Lagos Guerrero
