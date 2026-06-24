@@ -23,7 +23,22 @@ function CreatePost() {
 
   const mutation = useMutation({
     mutationFn: createPost,
-    onSuccess: () => {
+
+    onSuccess: (newPost) => {
+      const storedPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
+
+      const postToSave = {
+        ...newPost,
+        id: Date.now(),
+      };
+
+      localStorage.setItem(
+        "customPosts",
+        JSON.stringify([postToSave, ...storedPosts]),
+      );
+
       setMessage("Post created successfully!");
       setMessageType("success");
       reset();

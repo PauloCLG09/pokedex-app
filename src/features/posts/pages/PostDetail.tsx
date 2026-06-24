@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
+import CommentForm from "../components/CommentForm";
 import { getPostById } from "../services/post.service";
 
 interface Post {
@@ -14,7 +14,21 @@ function PostDetail() {
 
   const { data, isLoading, isError } = useQuery<Post>({
     queryKey: ["post", id],
-    queryFn: () => getPostById(id!),
+    queryFn: async () => {
+      const storedPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
+
+      const localPost = storedPosts.find(
+        (post: Post) => post.id === Number(id),
+      );
+
+      if (localPost) {
+        return localPost;
+      }
+
+      return getPostById(id!);
+    },
   });
 
   if (isLoading) return <p className="p-6 text-center">Loading post...</p>;
@@ -31,7 +45,8 @@ function PostDetail() {
 
         <h1 className="text-3xl font-bold mt-6 mb-4">{data?.title}</h1>
 
-        <p className="text-gray-700">{data?.body}</p>
+        <p className="text-gray-700 mb-8">{data?.body}</p>
+        <CommentForm postId={id!} />
       </div>
     </div>
   );

@@ -19,7 +19,15 @@ export interface Post {
 export const usePosts = () => {
   return useQuery<Post[]>({
     queryKey: ["posts"],
-    queryFn: getPosts,
+    queryFn: async () => {
+      const apiPosts = await getPosts();
+
+      const customPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
+
+      return [...customPosts, ...apiPosts];
+    },
   });
 };
 
@@ -52,6 +60,16 @@ export const useDeletePost = () => {
       queryClient.setQueryData<Post[]>(["posts"], (oldPosts) =>
         oldPosts?.filter((post) => post.id !== deletedId),
       );
+
+      const storedPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
+
+      const updatedPosts = storedPosts.filter(
+        (post: Post) => post.id !== deletedId,
+      );
+
+      localStorage.setItem("customPosts", JSON.stringify(updatedPosts));
     },
   });
 };

@@ -22,17 +22,58 @@ function EditPost() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["post", id],
-    queryFn: () => getPostById(id!),
-  });
+    queryFn: async () => {
+      const storedPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
 
+      const localPost = storedPosts.find(
+        (post: { id: number }) => post.id === Number(id),
+      );
+
+      if (localPost) {
+        return localPost;
+      }
+
+      return getPostById(id!);
+    },
+  });
   const mutation = useMutation({
-    mutationFn: (formData: PostFormData) => updatePost(id!, formData),
-    onSuccess: () => {
+    mutationFn: async (formData: PostFormData) => {
+      const storedPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
+
+      const localPost = storedPosts.find(
+        (post: { id: number }) => post.id === Number(id),
+      );
+
+      if (localPost) {
+        return {
+          id: Number(id),
+          ...formData,
+        };
+      }
+
+      return updatePost(id!, formData);
+    },
+
+    onSuccess: (_data, formData) => {
+      const storedPosts = JSON.parse(
+        localStorage.getItem("customPosts") || "[]",
+      );
+
+      const updatedPosts = storedPosts.map(
+        (post: { id: number; title: string; body: string }) =>
+          post.id === Number(id) ? { ...post, ...formData } : post,
+      );
+
+      localStorage.setItem("customPosts", JSON.stringify(updatedPosts));
+
       alert("Post updated successfully!");
       navigate("/posts");
     },
   });
-
   useEffect(() => {
     if (data) {
       reset({
