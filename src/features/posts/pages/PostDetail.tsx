@@ -37,15 +37,22 @@ function PostDetail() {
     return <p className="p-6 text-center text-red-500">Error loading post</p>;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-red-500 via-yellow-300 to-blue-600 p-6">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow p-6">
-        <Link to="/posts" className="text-blue-500">
+        <Link
+          to="/posts"
+          className="text-blue-500 font-medium hover:text-blue-700"
+        >
           ← Back to posts
         </Link>
 
-        <h1 className="text-3xl font-bold mt-6 mb-4">{data?.title}</h1>
+        <h1 className="text-4xl font-extrabold mt-6 mb-4 text-gray-800">
+          {data?.title}
+        </h1>
 
-        <p className="text-gray-700 mb-8">{data?.body}</p>
+        <div className="max-w-3xl mx-auto bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/40">
+          {data?.body}
+        </div>
         <CommentForm postId={id!} />
       </div>
     </div>

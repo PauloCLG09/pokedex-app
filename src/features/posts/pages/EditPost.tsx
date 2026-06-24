@@ -94,10 +94,10 @@ function EditPost() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-500 via-yellow-300 to-blue-600 p-6">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md"
+        className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-8 w-full max-w-md border border-white/40"
       >
         <Link to="/posts" className="text-blue-500">
           ← Back to posts
@@ -108,7 +108,7 @@ function EditPost() {
         <input
           type="text"
           {...register("title")}
-          className="w-full border p-3 rounded-lg mb-2"
+          className="w-full border border-gray-300 p-3 rounded-xl mb-2 focus:outline-none focus:ring-2 focus:ring-green-400"
         />
 
         {errors.title && (
@@ -117,17 +117,14 @@ function EditPost() {
 
         <textarea
           {...register("body")}
-          className="w-full border p-3 rounded-lg mb-2 h-32"
+          className="w-full border border-gray-300 p-3 rounded-xl mb-2 h-32 focus:outline-none focus:ring-2 focus:ring-green-400"
         />
 
         {errors.body && (
           <p className="text-red-500 mb-4">{errors.body.message}</p>
         )}
 
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition"
-        >
+        <button className="w-full bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 hover:scale-[1.02] transition">
           Update Post
         </button>
       </form>

@@ -39,7 +39,7 @@ function CommentForm({ postId }: Props) {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 border-t border-gray-200 pt-8">
       <h2 className="text-2xl font-bold mb-4">Comments</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 mb-6">
@@ -55,7 +55,7 @@ function CommentForm({ postId }: Props) {
           type="email"
           placeholder="Your email"
           {...register("email")}
-          className="border p-3 rounded-lg"
+          className="w-full border border-gray-300 p-3 rounded-xl h-28 focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
@@ -70,7 +70,7 @@ function CommentForm({ postId }: Props) {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition"
+          className="bg-blue-500 text-white py-3 rounded-xl font-bold hover:bg-blue-600 hover:scale-[1.02] transition"
         >
           Add Comment
         </button>
@@ -78,7 +78,10 @@ function CommentForm({ postId }: Props) {
 
       <div className="grid gap-3">
         {comments.map((comment, index) => (
-          <div key={index} className="bg-gray-100 rounded-lg p-4">
+          <div
+            key={index}
+            className="bg-white rounded-2xl p-5 shadow border border-gray-100"
+          >
             <h3 className="font-bold">{comment.name}</h3>
             <p className="text-sm text-gray-500">{comment.email}</p>
             <p className="mt-2">{comment.comment}</p>
